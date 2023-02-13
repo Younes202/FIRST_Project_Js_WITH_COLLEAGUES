@@ -6,10 +6,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
-    <body>
-	
-	<script src='rev.js'></script>
-	
+    <body>	
         <div class="container">
             <h1>Gestion commandes</h1>
             <ul class="nav nav-tabs">
@@ -23,8 +20,7 @@
                     <a class="nav-link" href="menu2" data-toogle="tabs">Activites</a>
                 </li>
             </ul>
-            <hr>
-           
+            <hr> 
 		 <table class="table table-hover">
                 <thead>
                     <div class="tab-content" class="tab-pane fade active show ">
@@ -34,29 +30,27 @@
                     <tr>
                       <td>
                           <div class="form-group">
-                              <input type="txt" placeholder="Write your designation"  class="form-control" >
+                              <input type="txt" placeholder="Write your designation" id ="designation" class="form-control" >
                           </div>
                       </td>
                       <td>
                           <div class="form-group">
-                              <input type="text"  placeholder="Price"  class="form-control" >
+                              <input type="text"  placeholder="Price"  id ="price" class="form-control" >
                           </div>
                       </td>
                       <td>
                         <div class="form-group">
-                            <input type="text" placeholder="Amount"  class="form-control">
+                            <input type="text" placeholder="Amount" id ="amount" class="form-control">
                         </div>
                     </td>
                       <td>
-                         <button type="submit"  class="btn  btn-primary btn-sm" >Add</button>
+                         <button type="submit"  class="btn  btn-primary btn-sm" id="btn">Add</button>
                       </td>
                     </tr>
-                    </div>
-</div>
-
+                  </div>
+	</div>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
             <hr>
@@ -69,13 +63,64 @@
                     <th>Total</th>
                     <th>Options</th>
                 </thead>
-                	
-	 <tbody id="content"></tbody>	
-</table>
+                <tbody id="content">       
+                </tbody>	
+        <script> 
+            var content = document.querySelector('#content');
+           function deleting(id) {
+                        let a = content.childNodes[id]
+                        content.removeChild(a)
+            }
+            function modify(id) {
+                  const   designation =   prompt("Modifying the Designation ...")
+                  const   price =   parseFloat(prompt("Modifying the Price ..."))
+                  const   amount = parseInt(prompt("Modifying the Amount ..."))
+                  const   total = (price * amount).toString();                  
+                    petites = table.childNodes
+                    petites[1].textContent = designation
+                    petites[2].textContent = price
+                    petites[3].textContent = amount    
+                    petites[4].textContent = total
 
-   
-        </html>
-        
+           }
+        let NextID= 0;
+        let btn = document.querySelector('#btn');
+        btn.addEventListener('click', function(){
+        let designation = document.getElementById('designation').value;
+        let price = document.getElementById('price').value;
+        let amount = document.getElementById('amount').value;
+        let tr = document.createElement('tr');
+        let tdid = document.createElement('td');
+        let tddes = document.createElement('td');
+        let tdprice = document.createElement('td');
+        let tdamount = document.createElement('td');
+        let tdtotal = document.createElement('td');
+        let tdoptions = document.createElement('td');
+            
+            tdid.textContent = ++NextID;
+            tddes.textContent = designation;
+            tdprice.textContent = price;
+            tdamount.textContent = amount;
+            tdtotal.textContent =  (price * amount).toString() ;
+            tdoptions.innerHTML = "<button  type='submit' id='mod' onclick='modify("+tdid.textContent+")'> modifier </button> <button type='submit'  onclick='deleting("+tdid.textContent+")'>Supprimer</button>";  
+      
+        tr.appendChild(tdid);
+        tr.appendChild(tddes);
+        tr.appendChild(tdprice);
+        tr.appendChild(tdamount);
+        tr.appendChild(tdtotal);
+        tr.appendChild(tdoptions);
+        content?.appendChild(tr);
+	}   
+           </script>
+	</table>
+</html>
+        	
+		
+    
+
+
+ 
         
 
 
